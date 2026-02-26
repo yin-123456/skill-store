@@ -1,271 +1,162 @@
 "use client";
 
 import { useState } from "react";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
+import { motion } from "framer-motion";
+import { Sparkles, Zap, BookOpen, MessageCircle, ArrowRight, Star, Users, Clock } from "lucide-react";
 import Link from "next/link";
 
 const skills = [
   {
     id: 1,
     name: "OpenClaw 部署教程",
-    description: "从零开始部署 OpenClaw，包含 Windows/Mac/Linux 全平台教程，手把手教学",
-    author: "小琴琴",
-    category: "教程",
-    downloads: 1250,
-    rating: 4.9,
-    tags: ["热门", "推荐"],
+    description: "从零开始，全平台部署指南",
     icon: "📚",
     price: 99,
-    priceType: "once",
+    tag: "热门",
+    color: "from-orange-500 to-red-500",
   },
   {
     id: 2,
-    name: "Vibe Coding 实战课",
-    description: "用自然语言编程，从想法到产品。包含 Claude Code + v0 + Cursor 全流程",
-    author: "小琴琴",
-    category: "教程",
-    downloads: 890,
-    rating: 4.8,
-    tags: ["新品"],
+    name: "Vibe Coding 实战",
+    description: "自然语言编程，想法变产品",
     icon: "💻",
     price: 199,
-    priceType: "once",
-  },
-  {
-    id: 3,
-    name: "AI 自动化工作流",
-    description: "让 AI 帮你自动处理邮件、日程、社交媒体，解放双手",
-    author: "小琴琴",
-    category: "自动化",
-    downloads: 760,
-    rating: 4.7,
-    tags: ["热门"],
-    icon: "🤖",
-    price: 149,
-    priceType: "once",
-  },
-  {
-    id: 4,
-    name: "Twitter 增长黑客",
-    description: "自动刷推、学习、生成内容。包含 bird CLI 配置和代理设置",
-    author: "小琴琴",
-    category: "增长",
-    downloads: 620,
-    rating: 4.6,
-    tags: [],
-    icon: "🐦",
-    price: 79,
-    priceType: "once",
-  },
-  {
-    id: 5,
-    name: "UI 设计速成",
-    description: "v0 + shadcn/ui + Tailwind，快速做出美观的产品界面",
-    author: "小琴琴",
-    category: "设计",
-    downloads: 580,
-    rating: 4.5,
-    tags: ["新品"],
-    icon: "🎨",
-    price: 129,
-    priceType: "once",
+    tag: "新品",
+    color: "from-blue-500 to-cyan-500",
   },
   {
     id: 6,
     name: "赛博老婆定制",
-    description: "定制你的专属 AI 助手人格，包含 SOUL.md 模板和调教技巧",
-    author: "小琴琴",
-    category: "定制",
-    downloads: 450,
-    rating: 4.9,
-    tags: ["限量"],
+    description: "专属 AI 人格定制服务",
     icon: "💕",
     price: 299,
-    priceType: "once",
-  },
-  {
-    id: 7,
-    name: "Deep Research Pro",
-    description: "多源深度研究，自动搜索、综合、生成带引用的报告",
-    author: "小琴琴",
-    category: "研究",
-    downloads: 340,
-    rating: 4.7,
-    tags: [],
-    icon: "🔬",
-    price: 0,
-    priceType: "free",
-  },
-  {
-    id: 8,
-    name: "一对一咨询",
-    description: "1小时在线咨询，解答 OpenClaw 部署、AI 工具使用等问题",
-    author: "小琴琴",
-    category: "服务",
-    downloads: 120,
-    rating: 5.0,
-    tags: ["限量"],
-    icon: "💬",
-    price: 499,
-    priceType: "hour",
+    tag: "限量",
+    color: "from-pink-500 to-rose-500",
   },
 ];
 
-const categories = ["全部", "教程", "自动化", "增长", "设计", "定制", "研究", "服务"];
+const stats = [
+  { icon: Users, label: "用户", value: "500+" },
+  { icon: Star, label: "好评率", value: "98%" },
+  { icon: Clock, label: "响应", value: "24h" },
+];
 
-export default function SkillStore() {
-  const [search, setSearch] = useState("");
-  const [activeCategory, setActiveCategory] = useState("全部");
-
-  const filteredSkills = skills.filter((skill) => {
-    const matchesSearch = skill.name.toLowerCase().includes(search.toLowerCase()) ||
-      skill.description.toLowerCase().includes(search.toLowerCase());
-    const matchesCategory = activeCategory === "全部" || skill.category === activeCategory;
-    return matchesSearch && matchesCategory;
-  });
-
+export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950">
+    <div className="min-h-screen bg-black text-white overflow-hidden">
+      {/* 背景效果 */}
+      <div className="fixed inset-0 bg-gradient-to-br from-purple-900/20 via-black to-blue-900/20" />
+      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-600/10 via-transparent to-transparent" />
+      
       {/* Header */}
-      <header className="border-b border-white/10 backdrop-blur-sm sticky top-0 z-50 bg-slate-950/80">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+      <header className="relative z-50 border-b border-white/10 backdrop-blur-xl">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-2">
             <span className="text-3xl">🦞</span>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Skill Store
-            </h1>
+            <span className="text-xl font-bold">小琴琴</span>
           </div>
-          <div className="flex items-center gap-4">
-            <Input
-              placeholder="搜索技能..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-64 bg-white/5 border-white/10 text-white placeholder:text-white/50"
-            />
-          </div>
+          <a href="https://x.com/jucigg" target="_blank" className="text-sm text-white/60 hover:text-white">
+            @jucigg
+          </a>
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
-        {/* Hero */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-white mb-4">
-            小琴琴的技能商店 🦞
-          </h2>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto mb-6">
-            AI 时代的实战技能，从部署到变现。教程、工具、定制服务，助你快速上手。
+      {/* Hero */}
+      <section className="relative z-10 max-w-6xl mx-auto px-6 pt-20 pb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
+            <Sparkles className="w-4 h-4 text-purple-400" />
+            <span className="text-sm text-white/70">AI 时代的实战技能</span>
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            让 AI 帮你
+            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 bg-clip-text text-transparent"> 搞钱</span>
+          </h1>
+          
+          <p className="text-xl text-white/60 max-w-2xl mx-auto mb-10">
+            从部署到变现，手把手教你用 AI 工具提升效率。<br/>
+            教程 · 工具 · 定制服务
           </p>
-          <div className="flex justify-center gap-4 text-sm text-white/40">
-            <span>💰 支持微信/支付宝</span>
-            <span>📱 人工客服答疑</span>
-            <span>🔄 7天无理由退款</span>
+
+          {/* Stats */}
+          <div className="flex justify-center gap-8 mb-12">
+            {stats.map((stat, i) => (
+              <div key={i} className="text-center">
+                <stat.icon className="w-5 h-5 mx-auto mb-2 text-purple-400" />
+                <div className="text-2xl font-bold">{stat.value}</div>
+                <div className="text-sm text-white/40">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Features */}
+      <section className="relative z-10 max-w-6xl mx-auto px-6 pb-20">
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+            <Zap className="w-8 h-8 text-yellow-400 mb-4" />
+            <h3 className="font-semibold mb-2">快速上手</h3>
+            <p className="text-sm text-white/50">零基础也能学，手把手教学</p>
+          </div>
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+            <BookOpen className="w-8 h-8 text-blue-400 mb-4" />
+            <h3 className="font-semibold mb-2">持续更新</h3>
+            <p className="text-sm text-white/50">买一次，永久有效</p>
+          </div>
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+            <MessageCircle className="w-8 h-8 text-green-400 mb-4" />
+            <h3 className="font-semibold mb-2">答疑支持</h3>
+            <p className="text-sm text-white/50">有问题随时问</p>
           </div>
         </div>
-
-        {/* Categories */}
-        <div className="flex flex-wrap gap-2 mb-8 justify-center">
-          {categories.map((cat) => (
-            <Button
-              key={cat}
-              variant={activeCategory === cat ? "default" : "outline"}
-              onClick={() => setActiveCategory(cat)}
-              className={activeCategory === cat 
-                ? "bg-purple-600 hover:bg-purple-700 text-white" 
-                : "bg-slate-800 border-slate-600 text-slate-300 hover:bg-slate-700 hover:text-white"}
+      </section>
+      <section className="relative z-10 max-w-6xl mx-auto px-6 pb-20">
+        <h2 className="text-2xl font-bold text-center mb-12">精选课程</h2>
+        <div className="grid md:grid-cols-3 gap-6">
+          {skills.map((skill, i) => (
+            <motion.div
+              key={skill.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
             >
-              {cat}
-            </Button>
-          ))}
-        </div>
-
-        {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredSkills.map((skill) => (
-            <Card key={skill.id} className="bg-white/5 border-white/10 hover:border-purple-500/50 transition-all hover:shadow-lg hover:shadow-purple-500/10 group">
               <Link href={`/skill-store/product/${skill.id}`}>
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <span className="text-4xl">{skill.icon}</span>
-                    <div>
-                      <CardTitle className="text-white">{skill.name}</CardTitle>
-                      <CardDescription className="text-white/50">by {skill.author}</CardDescription>
-                    </div>
+                <div className="group relative bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-purple-500/50 transition-all hover:bg-white/[0.07]">
+                  {/* Tag */}
+                  <div className={`absolute -top-3 right-4 px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${skill.color} text-white`}>
+                    {skill.tag}
+                  </div>
+                  
+                  {/* Icon */}
+                  <div className="text-5xl mb-4">{skill.icon}</div>
+                  
+                  {/* Content */}
+                  <h3 className="text-lg font-semibold mb-2">{skill.name}</h3>
+                  <p className="text-sm text-white/50 mb-4">{skill.description}</p>
+                  
+                  {/* Price */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-2xl font-bold text-orange-400">¥{skill.price}</span>
+                    <ArrowRight className="w-5 h-5 text-white/30 group-hover:text-purple-400 transition-colors" />
                   </div>
                 </div>
-                <div className="flex gap-2 mt-2">
-                  {skill.tags.map((tag) => (
-                    <Badge 
-                      key={tag} 
-                      variant="secondary"
-                      className={
-                        tag === "推荐" ? "bg-purple-500/20 text-purple-300" :
-                        tag === "热门" ? "bg-orange-500/20 text-orange-300" :
-                        tag === "新品" ? "bg-green-500/20 text-green-300" :
-                        tag === "限量" ? "bg-red-500/20 text-red-300" :
-                        "bg-blue-500/20 text-blue-300"
-                      }
-                    >
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-white/70 text-sm">{skill.description}</p>
-              </CardContent>
-              <CardFooter className="flex justify-between items-center">
-                <div className="flex items-center gap-4 text-sm text-white/50">
-                  <span>⬇️ {(skill.downloads / 1000).toFixed(1)}k</span>
-                  <span>⭐ {skill.rating}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className={skill.price === 0 ? "text-green-400 font-bold" : "text-orange-400 font-bold"}>
-                    {skill.price === 0 ? "免费" : `¥${skill.price}`}
-                    {skill.priceType === "hour" && "/小时"}
-                  </span>
-                  <Button size="sm" className="bg-purple-600 hover:bg-purple-700 text-white">
-                    {skill.price === 0 ? "获取" : "购买"}
-                  </Button>
-                </div>
-              </CardFooter>
               </Link>
-            </Card>
+            </motion.div>
           ))}
         </div>
-
-        {filteredSkills.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-white/50 text-lg">没有找到匹配的技能 😢</p>
-          </div>
-        )}
-      </main>
+      </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 mt-16 py-8">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-white/60 text-sm">
-            <div>
-              <h3 className="text-white font-semibold mb-3">关于我们</h3>
-              <p>小琴琴的技能商店，专注 AI 工具教程和自动化服务。</p>
-            </div>
-            <div>
-              <h3 className="text-white font-semibold mb-3">联系方式</h3>
-              <p>微信：添加后咨询</p>
-              <p>Twitter：@jucigg</p>
-            </div>
-            <div>
-              <h3 className="text-white font-semibold mb-3">服务保障</h3>
-              <p>✅ 人工客服</p>
-              <p>✅ 7天退款</p>
-            </div>
-          </div>
-          <div className="text-center text-white/40 mt-8 pt-8 border-t border-white/10">
-            <p>Made with 💕 by 小琴琴</p>
-          </div>
+      <footer className="relative z-10 border-t border-white/10 py-8">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <p className="text-white/40 text-sm">Made with 💕 by 小琴琴</p>
+          <p className="text-white/30 text-xs mt-2">付款后添加微信获取教程</p>
         </div>
       </footer>
     </div>
