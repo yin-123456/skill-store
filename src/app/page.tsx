@@ -1,126 +1,106 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Sparkles, ArrowRight, Star, Users, Clock, Zap, BookOpen, MessageCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 const skills = [
-  { id: 1, name: "OpenClaw 部署教程", description: "从零开始，全平台部署指南", icon: "📚", price: 99, tag: "热门" },
-  { id: 2, name: "Vibe Coding 实战", description: "自然语言编程，想法变产品", icon: "💻", price: 199, tag: "新品" },
-  { id: 6, name: "赛博老婆定制", description: "专属 AI 人格定制服务", icon: "💕", price: 299, tag: "限量" },
+  { id: 1, name: "OpenClaw 部署教程", desc: "从零开始，全平台部署指南", icon: "📚", price: 99 },
+  { id: 2, name: "Vibe Coding 实战", desc: "自然语言编程，想法变产品", icon: "💻", price: 199 },
+  { id: 6, name: "赛博老婆定制", desc: "专属 AI 人格定制服务", icon: "💕", price: 299 },
 ];
 
 const stats = [
-  { icon: Users, label: "用户", value: "500+" },
-  { icon: Star, label: "好评率", value: "98%" },
-  { icon: Clock, label: "响应", value: "24h" },
+  { icon: "🦞", value: "500+", label: "用户" },
+  { icon: "⭐", value: "98%", label: "好评率" },
+  { icon: "⚡", value: "24h", label: "响应" },
+];
+
+const tools = [
+  { icon: "🦞", name: "OpenClaw", desc: "AI Agent" },
+  { icon: "🧠", name: "Claude", desc: "Anthropic" },
+  { icon: "⚡", name: "GPT-4", desc: "OpenAI" },
+  { icon: "▲", name: "Next.js", desc: "Framework" },
 ];
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
-      {/* 背景光效 */}
-      <div className="fixed inset-0">
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-purple-500/30 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-[100px]" />
-      </div>
-
+    <div className="min-h-screen bg-[#0c0c0c] text-white">
+      {/* 背景渐变 */}
+      <div className="fixed inset-0 bg-gradient-to-b from-purple-900/10 via-transparent to-blue-900/10" />
+      
       {/* Header */}
-      <header className="relative z-50 border-b border-white/10">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-3xl">🦞</span>
-            <span className="text-xl font-bold">小琴琴</span>
+      <header className="relative z-50 border-b border-white/5">
+        <div className="max-w-4xl mx-auto px-6 py-5 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <span className="text-2xl">🦞</span>
+            <span className="font-medium">小琴琴</span>
           </div>
-          <a href="https://x.com/jucigg" target="_blank" className="text-sm text-white/60 hover:text-white transition">@jucigg</a>
+          <a href="https://x.com/jucigg" target="_blank" className="text-sm text-white/40 hover:text-white/80 transition">@jucigg</a>
         </div>
       </header>
 
       {/* Hero */}
-      <section className="relative z-10 max-w-6xl mx-auto px-6 pt-20 pb-16">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
-            <Sparkles className="w-4 h-4 text-purple-400" />
-            <span className="text-sm text-white/70">AI 时代的实战技能</span>
-          </div>
-          
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            让 AI 帮你
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 bg-clip-text text-transparent"> 搞钱</span>
+      <section className="relative z-10 max-w-4xl mx-auto px-6 pt-20 pb-16 text-center">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+          <p className="text-white/40 text-sm mb-4">AI Agent Builder</p>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            小琴琴技能商店
           </h1>
-          
-          <p className="text-xl text-white/60 max-w-2xl mx-auto mb-10">
-            从部署到变现，手把手教你用 AI 工具提升效率
-          </p>
-
-          <div className="flex justify-center gap-8">
-            {stats.map((stat, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + i * 0.1 }}
-                className="text-center"
-              >
-                <stat.icon className="w-5 h-5 mx-auto mb-2 text-purple-400" />
-                <div className="text-2xl font-bold">{stat.value}</div>
-                <div className="text-sm text-white/40">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
+          <p className="text-lg text-white/50 mb-2">让 AI 帮你搞钱</p>
+          <p className="text-white/30 text-sm">OpenClaw 资深玩家 · AI 教程 · 定制服务</p>
         </motion.div>
-      </section>
 
-      {/* Features */}
-      <section className="relative z-10 max-w-6xl mx-auto px-6 pb-20">
-        <div className="grid md:grid-cols-3 gap-6">
-          {[
-            { icon: Zap, title: "快速上手", desc: "零基础也能学", color: "text-yellow-400" },
-            { icon: BookOpen, title: "持续更新", desc: "买一次永久有效", color: "text-blue-400" },
-            { icon: MessageCircle, title: "答疑支持", desc: "有问题随时问", color: "text-green-400" },
-          ].map((f, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 + i * 0.1 }}
-              className="bg-white/5 border border-white/10 rounded-2xl p-6"
-            >
-              <f.icon className={`w-8 h-8 ${f.color} mb-4`} />
-              <h3 className="font-semibold mb-2">{f.title}</h3>
-              <p className="text-sm text-white/50">{f.desc}</p>
+        {/* Stats */}
+        <div className="flex justify-center gap-12 mt-12">
+          {stats.map((s, i) => (
+            <motion.div key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 + i * 0.1 }} className="text-center">
+              <div className="text-2xl mb-2">{s.icon}</div>
+              <div className="text-2xl font-bold">{s.value}</div>
+              <div className="text-xs text-white/30">{s.label}</div>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* Products */}
-      <section className="relative z-10 max-w-6xl mx-auto px-6 pb-20">
-        <h2 className="text-2xl font-bold text-center mb-12">精选课程</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          {skills.map((skill, i) => (
-            <motion.div
-              key={skill.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 + i * 0.1 }}
-              whileHover={{ y: -8, transition: { duration: 0.2 } }}
-              className="group"
-            >
-              <Link href={`/skill-store/product/${skill.id}`}>
-                <div className="relative bg-gradient-to-b from-white/[0.08] to-transparent border border-white/10 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)]">
-                  <div className="absolute -top-3 right-4 px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-purple-500 to-pink-500">{skill.tag}</div>
-                  <div className="text-5xl mb-4">{skill.icon}</div>
-                  <h3 className="text-lg font-semibold mb-2">{skill.name}</h3>
-                  <p className="text-sm text-white/50 mb-4">{skill.description}</p>
+      {/* Tools */}
+      <section className="relative z-10 max-w-4xl mx-auto px-6 pb-16">
+        <p className="text-white/30 text-sm mb-2">Tools</p>
+        <h2 className="text-2xl font-bold mb-8">技术栈</h2>
+        <div className="grid grid-cols-4 gap-3">
+          {tools.map((t, i) => (
+            <motion.div key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 + i * 0.05 }} className="bg-white/[0.02] border border-white/[0.05] rounded-lg p-4 text-center">
+              <div className="text-2xl mb-2">{t.icon}</div>
+              <div className="text-sm font-medium">{t.name}</div>
+              <div className="text-xs text-white/30">{t.desc}</div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="relative z-10 border-t border-white/5 py-8">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <p className="text-white/30 text-sm">Made with 💕 by 小琴琴</p>
+        </div>
+      </footer>
+    </div>
+  );
+}
+      <section className="relative z-10 max-w-4xl mx-auto px-6 pb-16">
+        <p className="text-white/30 text-sm mb-2">Products</p>
+        <h2 className="text-2xl font-bold mb-8">产品</h2>
+        <div className="grid md:grid-cols-3 gap-4">
+          {skills.map((s, i) => (
+            <motion.div key={s.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 + i * 0.1 }} whileHover={{ y: -4 }} className="group">
+              <Link href={`/skill-store/product/${s.id}`}>
+                <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-5 hover:border-white/20 hover:bg-white/[0.05] transition-all">
+                  <div className="text-3xl mb-3">{s.icon}</div>
+                  <h3 className="font-medium mb-1">{s.name}</h3>
+                  <p className="text-sm text-white/40 mb-4">{s.desc}</p>
                   <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-orange-400">¥{skill.price}</span>
-                    <ArrowRight className="w-5 h-5 text-white/30 group-hover:text-purple-400 group-hover:translate-x-1 transition-all" />
+                    <span className="text-lg font-bold text-orange-400">¥{s.price}</span>
+                    <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-white/60 transition" />
                   </div>
                 </div>
               </Link>
@@ -128,13 +108,3 @@ export default function Home() {
           ))}
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-white/10 py-8">
-        <div className="text-center">
-          <p className="text-white/40 text-sm">Made with 💕 by 小琴琴</p>
-        </div>
-      </footer>
-    </div>
-  );
-}
