@@ -19,10 +19,20 @@ const tools = [
   { icon: "💬", name: "Telegram", desc: "Bot Interface" },
 ];
 
+// Section 标题组件 - 带背景大字
+function SectionTitle({ en, zh }: { en: string; zh: string }) {
+  return (
+    <div className="relative mb-8">
+      <span className="absolute -top-6 left-0 text-6xl font-bold text-zinc-800/30 select-none pointer-events-none">{en}</span>
+      <p className="text-zinc-600 text-xs tracking-widest mb-2">{en}</p>
+      <h2 className="text-2xl font-semibold text-white relative z-10">{zh}</h2>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#09090b] text-white font-sans">
-      {/* 背景 */}
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(120,119,198,0.15),transparent)]" />
 
       {/* Nav */}
@@ -46,33 +56,11 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Products */}
+      {/* About */}
       <section className="relative z-10 max-w-5xl mx-auto px-6 pb-20">
-        <p className="text-zinc-600 text-xs tracking-widest mb-2">Products</p>
-        <h2 className="text-2xl font-semibold text-white mb-8">产品</h2>
-        <div className="grid md:grid-cols-3 gap-4">
-          {products.map((p, i) => (
-            <motion.div key={p.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} whileHover={{ y: -4 }}>
-              <Link href={`/skill-store/product/${p.id}`}>
-                <div className="group bg-zinc-900/50 border border-zinc-800 rounded-xl p-5 hover:border-zinc-700 transition-all">
-                  <h3 className="font-medium text-white mb-1">{p.name}</h3>
-                  <p className="text-sm text-zinc-500 mb-4">{p.desc}</p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-orange-400 font-semibold">{p.price}</span>
-                    <ArrowUpRight className="w-4 h-4 text-zinc-600 group-hover:text-zinc-400 transition" />
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-      <section className="relative z-10 max-w-5xl mx-auto px-6 pb-20">
-        <p className="text-zinc-600 text-xs tracking-widest mb-2">About</p>
-        <h2 className="text-2xl font-semibold text-white mb-6">关于我</h2>
+        <SectionTitle en="About" zh="关于我" />
         <p className="text-zinc-400 leading-relaxed max-w-2xl">
-          我是一个 OpenClaw 深度用户、AI Agent 构建者。我相信 AI Agent 是下一个生产力革命。
-          现在，我把这些能力开放给你。
+          我是一个 OpenClaw 深度用户、AI Agent 构建者。我相信 AI Agent 是下一个生产力革命。现在，我把这些能力开放给你。
         </p>
         <div className="flex gap-12 mt-10">
           <div><span className="text-2xl">🦞</span><p className="text-2xl font-bold text-white mt-2">500+</p><p className="text-xs text-zinc-600">用户</p></div>
@@ -81,17 +69,49 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Products */}
+      <section className="relative z-10 max-w-5xl mx-auto px-6 pb-20">
+        <SectionTitle en="Products" zh="产品" />
+        <div className="grid md:grid-cols-3 gap-4">
+          {products.map((p, i) => (
+            <motion.div
+              key={p.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Link href={`/skill-store/product/${p.id}`}>
+                <div className="group bg-zinc-900/50 border border-zinc-800 rounded-xl p-5 hover:border-zinc-600 hover:bg-zinc-900/80 transition-all cursor-pointer active:scale-[0.98]">
+                  <h3 className="font-medium text-white mb-1">{p.name}</h3>
+                  <p className="text-sm text-zinc-500 mb-4">{p.desc}</p>
+                  <div className="flex justify-between items-center">
+                    <span className="text-orange-400 font-semibold">{p.price}</span>
+                    <ArrowUpRight className="w-4 h-4 text-zinc-600 group-hover:text-zinc-300 transition" />
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       {/* Tools */}
       <section className="relative z-10 max-w-5xl mx-auto px-6 pb-20">
-        <p className="text-zinc-600 text-xs tracking-widest mb-2">Tools</p>
-        <h2 className="text-2xl font-semibold text-white mb-8">技术栈</h2>
+        <SectionTitle en="Tools" zh="技术栈" />
         <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
           {tools.map((t, i) => (
-            <div key={i} className="bg-zinc-900/30 border border-zinc-800/50 rounded-lg p-4 text-center">
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-zinc-900/30 border border-zinc-800/50 rounded-lg p-4 text-center cursor-pointer hover:border-zinc-700 transition-all"
+            >
               <span className="text-xl">{t.icon}</span>
               <p className="text-xs font-medium text-zinc-300 mt-2">{t.name}</p>
               <p className="text-[10px] text-zinc-600">{t.desc}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
