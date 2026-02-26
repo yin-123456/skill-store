@@ -22,9 +22,9 @@ const tools = [
 // Section 标题组件 - 带背景大字
 function SectionTitle({ en, zh }: { en: string; zh: string }) {
   return (
-    <div className="relative mb-8">
-      <span className="absolute -top-6 left-0 text-6xl font-bold text-zinc-800/30 select-none pointer-events-none">{en}</span>
-      <p className="text-zinc-600 text-xs tracking-widest mb-2">{en}</p>
+    <div className="relative mb-10">
+      <span className="absolute -top-8 -left-2 text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-zinc-800/50 to-transparent select-none pointer-events-none tracking-tight">{en}</span>
+      <p className="text-zinc-500 text-xs tracking-[0.2em] uppercase mb-2 relative z-10">{en}</p>
       <h2 className="text-2xl font-semibold text-white relative z-10">{zh}</h2>
     </div>
   );
