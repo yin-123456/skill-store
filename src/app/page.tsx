@@ -185,7 +185,7 @@ export default function SkillStore() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredSkills.map((skill) => (
             <Card key={skill.id} className="bg-white/5 border-white/10 hover:border-purple-500/50 transition-all hover:shadow-lg hover:shadow-purple-500/10 group">
-              <Link href={`/product/${skill.id}`}>
+              <Link href={`/skill-store/product/${skill.id}`}>
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
